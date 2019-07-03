@@ -1,0 +1,65 @@
+---
+title: "tidytuesday_media_franchises"
+author: "Jonathon Mifsud"
+date: "3 July 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+media_franchises <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-02/media_franchises.csv")
+
+glimpse(media_franchises)
+
+```
+
+Looking at the data I think this week I would like to make a bar-plot. Franchise has a length of 103 unique titles, which may be too lengthy to analyse in this form. Instead, I aim to make a barplot of the total revenue seperated by year. I will segment each year to show the contributions of each each type of original media. 
+```{r}
+# delete duplicates
+media_franchises <- media_franchises[!duplicated(media_franchises), ]
+```
+
+```{r}
+media_franchises %>%  count(year_created, sort = TRUE)
+```
+
+We have alot of years to work with. Instead of looking at a subset of this I will try creating multiple bins. 
+
+```{r}
+year_collapse <- media_franchises %>% 
+  fct_collapse(year_created,
+               1924_1934 =  c("1924", "1925","1926", "1927","1928", "1929","1930", "1931","1932", "1933","1934"),
+         #may be easier to bin this as a numerical variable than convert it over.       
+               
+               
+               )
+```
+
+
+```{r}
+year_counts <- year_collapse %>%
+  group_by(year_created) 
+  summarise(total_yearly_revenue = sum(revenue), media_count = n()) %>%
+  mutate(year_created = as.factor(year_created)) %>%
+  mutate(year_created = fct_reorder(year_created, revenue))
+
+count(cleantimecat, category, subcategory, sort = TRUE) %>%
+  mutate(category = fct_reorder(category, n , sum, .desc= FALSE)) %>% 
+  ggplot(aes(category, n, fill = subcategory))+
+  geom_chicklet(width = 0.75) +
+  scale_y_comma(position = "right") +
+  coord_flip() +
+  ggthemes::scale_fill_tableau("Tableau 20", name = NULL) +
+  labs(
+    x = NULL, y = NULL, fill = NULL,
+    title = "title",
+    subtitle = "subtitle",
+    caption = "caption"
+  ) +
+  theme_ipsum_rc(grid="X") +
+  theme(legend.position = "bottom", text=element_text(size=16,  family="serif"))
+```
