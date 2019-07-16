@@ -92,4 +92,65 @@ p <- r4ds_melt %>%
   )
 p
 
+
+
+
+## For exporting (problems with font size)
+p2 <- r4ds_melt %>%
+  ggplot(aes(day, value, fill = variable)) +
+  geom_chicklet(width = .6, radius = grid::unit(5, "pt")) +
+  theme_minimal() +
+  ggthemes::scale_fill_tableau('Color Blind',
+                               name = "Type of R4DS Member:",
+                               labels = c("Poster", "Shy")) +
+  theme(
+    plot.background = element_rect(fill = "grey97", color = "white"),
+    legend.position = "bottom",
+    legend.title = element_text(color = "grey30", size = 32, face = "bold"),
+    legend.text = element_text(
+      color = "grey30",
+      size = 32,
+      face = "bold",
+      margin = margin(t = 10)
+    ),
+    legend.spacing.x = unit(0.8, "cm"),
+    legend.spacing.y = NULL,
+    axis.text.y = element_text(color = "grey30", size = 30),
+    axis.text.x = element_text(color = "grey30", size = 40),
+    axis.title.y = element_text(
+      color = "grey30",
+      size = 40,
+      face = "bold",
+      margin = margin(
+        t = 0,
+        r = 20,
+        b = 0,
+        l = 0
+      )
+    ),
+    axis.title.x = element_text(color = "grey30", size = 40, face = "bold"),
+    plot.title = element_text(color = "grey30", size = 60, face = "bold"),
+    plot.subtitle = element_text(size = 40),
+    plot.caption = element_text(size = 18)
+  ) +
+  labs(
+    x = NULL ,
+    y = "Total Number of Active Members Overtime",
+    title = "User activity on R4DS Slack",
+    subtitle = "By day of the week, segmented by whether the user contributes a message/post or just reads (shy)",
+    caption = "Source R4DS Slack, Plot by @jonathon_mifsud"
+  ) +
+  guides(
+    fill = guide_legend(
+      title = "Type of R4DS Member:",
+      label.position = "right",
+      label.hjust = 0.5,
+      title.position = "top",
+      title.vjust = 0.3
+    )
+  )
+p2
+
+
+
 ggsave("2019/plots/plot_2019-07-16.png", width = 29, height = 21, units = "cm", dpi = "retina")
