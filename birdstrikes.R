@@ -13,7 +13,6 @@ library(viridis)
 library(cowplot)
 library(rvest)
 library(albersusa)
-
 ### Cleaning
 
 # I wanted to try a spatial plot this week. The dataset provided would need some rearranging for this to work.
@@ -124,9 +123,9 @@ theme_map <- function(...) {
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       # background colors
-      plot.background = element_rect(color = NA),
-      panel.background = element_rect(color = NA),
-      legend.background = element_rect(color = NA),
+      plot.background = element_rect(fill = "white", colour = NA),
+      panel.background = element_rect(fill = "white", colour = NA),
+      legend.background = element_rect(fill = "white", colour = NA),
       # borders and margins
       plot.margin = unit(c(.5, .5, .2, .5), "cm"),
       panel.border = element_blank(),
@@ -139,12 +138,12 @@ theme_map <- function(...) {
         color = "black"
       ),
       plot.title = element_text(
-        size = 15,
+        size = 20,
         hjust = 0.5,
         color = "black"
       ),
       plot.subtitle = element_text(
-        size = 10,
+        size = 15,
         hjust = 0.5,
         color = "black",
         margin = margin(
@@ -241,8 +240,8 @@ map <- ggplot(
           data = all_usa) +
   geom_sf(aes(fill = fill),
           # line for state borders
-          color = "gray95",
-          size = 0.2) +
+          color = "white",
+          size = 0.4) +
   scale_alpha(name = "",
               range = c(0.6, 0),
               guide = F) +
@@ -251,8 +250,8 @@ map <- ggplot(
     x = NULL,
     y = NULL,
     title = "More flights, more wildlife strikes?",
-    subtitle = paste0("Average reported wildlife strikes by airplanes across 34 US states from 2014-2017"),
-    caption = "Map: Author:"
+    subtitle = paste0("Average reported wildlife strikes by airplanes across 29 US states from 2014-2017"),
+    caption = "Author: @jonathon_mifsud, Code: , Source: FAA’s Wildlife Strike Reporting Database"
   ) +
   theme_map()
 
@@ -269,15 +268,22 @@ legend <- ggplot() +
                           y = mean_pass,
                           fill = fill)) +
   scale_fill_identity() +
-  labs(x = "Higher incidents",
-       y = "Higher number of flights") + #technically passangers
+  labs(x = "More incidents",
+       y = "More flights")+ # Arrows were added using illustrator after trying endlessly to do it in R
   theme_map() +
-  theme(axis.title = element_text(size = 8)) +
+  theme(axis.title = element_text(size = 14)) +
   coord_fixed()
 
+# Joining the plot and legend 
 
-ggdraw() +
-  draw_plot(full_boarders, 0, 0, 1, 1) +
+plot <- ggdraw() +
   draw_plot(map, 0, 0, 1, 1) +
   draw_plot(legend, 0.05, 0.075, 0.2, 0.2)
 
+ggsave(
+  "2019/plots/plot_2019-07-24.png",
+  width = 29,
+  height = 21,
+  units = "cm",
+  dpi = "retina"
+)
