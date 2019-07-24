@@ -54,7 +54,7 @@ ad2_clean <- ad2 %>%
          "2015" = "2015[4]",
          "2014" = "2014[1]")
 
-## A horrible way to convert these to numeric and remove commas but it was the only one I found to work
+## A horriblly unclean way to convert these to numeric and remove commas but it was the only one I found to work of the top of my head
 ad1_clean$`2017` <- as.numeric(gsub(",", "", ad1_clean$`2017`))
 ad1_clean$`2016` <- as.numeric(gsub(",", "", ad1_clean$`2016`))
 ad1_clean$`2015` <- as.numeric(gsub(",", "", ad1_clean$`2015`))
@@ -76,10 +76,7 @@ passangers <- passangers %>%
 
 
 # Bird data
-bird_impacts <-
-  readr::read_csv(
-    "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-23/bird_impacts.csv"
-  )
+bird_impacts <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-23/wildlife_impacts.csv")
 
 bird_trim <- bird_impacts %>%
   dplyr::select("state", "incident_year") %>%
@@ -238,13 +235,13 @@ all_usa <- st_join(us_all_counties, states_all_fips)
 # Final plot starts here
 map <- ggplot(
   data = cont_usa_sightings) +
-  geom_sf(aes(fill = "gray97"), # states that have no data
+  geom_sf(aes(fill = "gray88"), # states that have no data
           color = NA,
           size = 0.2,
           data = all_usa) +
   geom_sf(aes(fill = fill),
           # line for state borders
-          color = "gray85",
+          color = "gray95",
           size = 0.2) +
   scale_alpha(name = "",
               range = c(0.6, 0),
@@ -253,10 +250,9 @@ map <- ggplot(
   labs(
     x = NULL,
     y = NULL,
-    title = "Title",
-    subtitle = paste0("Subtitle",
-                      " Subtitle"),
-    caption = "default_caption"
+    title = "More flights, more wildlife strikes?",
+    subtitle = paste0("Average reported wildlife strikes by airplanes across 34 US states from 2014-2017"),
+    caption = "Map: Author:"
   ) +
   theme_map()
 
@@ -276,7 +272,7 @@ legend <- ggplot() +
   labs(x = "Higher incidents",
        y = "Higher number of flights") + #technically passangers
   theme_map() +
-  theme(axis.title = element_text(size = 6)) +
+  theme(axis.title = element_text(size = 8)) +
   coord_fixed()
 
 
