@@ -3,9 +3,7 @@
 # Jonathon Mifsud
 
 library(tidyverse)
-library(ggrepel)
 library(showtext)
-library(ggpomological)
 library(cowplot)
 library(ggthemes)
 library(showtext)
