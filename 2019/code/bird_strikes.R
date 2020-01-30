@@ -30,7 +30,7 @@ airport_data <-
 # Used rvest to import the table and the chrome extension SelectorGadget to obtain the xpath's
 
 ad1 <- airport_data %>%
-  html_node(xpath = '//*[@id="mw-content-text"]/div/table[1]') %>%
+  html_node(xpath = '//*+[contains(concat( " ", @class, " " ), concat( " ", "jquery-tablesorter", " " ))]//*[contains(concat( " ", @class, " " ), concat( " ", "jquery-tablesorter", " " ))]//*[contains(concat( " ", @class, " " ), concat( " ", "headerSort", " " ))] | //*+[contains(concat( " ", @class, " " ), concat( " ", "jquery-tablesorter", " " ))]//*[contains(concat( " ", @class, " " ), concat( " ", "jquery-tablesorter", " " ))]//td') %>%
   html_table()
 
 ad1_clean <- ad1 %>%

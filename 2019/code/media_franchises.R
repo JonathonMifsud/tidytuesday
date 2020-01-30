@@ -25,8 +25,7 @@ media_franchises <-
 #We have 52 individual years so we could break this evenly into 13 bins. I am sure there is a better way to generate the labels!
 
 media_franchises$year_created <-
-  cut(
-    media_franchises$year_created,
+  cut(media_franchises$year_created,
     breaks = 13,
     labels = c(
       "1924-1931",
@@ -41,7 +40,7 @@ media_franchises$year_created <-
       "1986-1992",
       "1992-1999",
       "1999-2006",
-      "2006-2013")
+      "2006-2013"))
 
 year_counts <- media_franchises %>%
   group_by(revenue_category, year_created) %>%

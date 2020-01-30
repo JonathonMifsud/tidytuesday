@@ -51,7 +51,8 @@ pcpu <- cpu %>%
              fill = cpu_col) +
   geom_smooth(color = "white",
               alpha = 0.5,
-              fill = cpu_col) +
+              fill = cpu_col)+
+
   scale_x_continuous(breaks = c(1971, 1987, 2003, 2019),
                      limits = c(1963, 2025)) +
   scale_y_log10(breaks = c(1, 10 ^ 3, 10 ^ 6, 10 ^ 9, 10 ^ 12),
@@ -84,7 +85,7 @@ pgpu <- gpu %>%
              fill = gpu_col) +
   geom_smooth(color = "white",
               alpha = 0.5,
-              fill = gpu_col) +
+              fill = gpu_col, method = "lm") +
   scale_x_continuous(breaks = c(1971, 1987, 2003, 2019),
                      limits = c(1963, 2025)) +
   scale_y_log10(breaks = c(1, 10 ^ 3, 10 ^ 6, 10 ^ 9, 10 ^ 12),
