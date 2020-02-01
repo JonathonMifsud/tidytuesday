@@ -5,6 +5,8 @@
 <div align="center">
 This is a collection of data visualizations I created for Tidytuesday using the R package {ggplot2}. 
   
+[My Twitter](https://twitter.com/jonathon_mifsud)
+
+[Tidytuesday Page](https://github.com/rfordatascience/tidytuesday)
+
   
-[Twitter]:https://twitter.com/jonathon_mifsud
-[Tidytuesday Page]:https://github.com/rfordatascience/tidytuesday
