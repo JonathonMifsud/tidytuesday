@@ -3,4 +3,8 @@
 </h1>
 
 <div align="center">
-This is a collection of data visualizations I created for Tidytuesday using the R package {ggplot2}. See https://github.com/rfordatascience/tidytuesday
+This is a collection of data visualizations I created for Tidytuesday using the R package {ggplot2}. 
+  
+  
+[Twitter]:https://twitter.com/jonathon_mifsud
+[Tidytuesday Page]:https://github.com/rfordatascience/tidytuesday
