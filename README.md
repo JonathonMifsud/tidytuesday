@@ -3,7 +3,7 @@
 </h1>
 
 <div align="center">
-This is a collection of data visualizations I created for Tidytuesday using the R package {ggplot2}. 
+This is a collection of data visualizations I created for Tidytuesday using the Tidyverse collection of packages. 
   
   
 [My Twitter](https://twitter.com/jonathon_mifsud)
